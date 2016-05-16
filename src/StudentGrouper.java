@@ -61,6 +61,8 @@ public class StudentGrouper {
 			}
 		}
 		teams.put("Minela Mustafi", 7);
+		studentNames.add("Minela Mustafi");
+		Collections.sort(studentNames, collator);
 		
 		List<String> projects = loadTextListFromFile("projekti.txt");
 		Collections.sort(projects, collator);
@@ -82,6 +84,14 @@ public class StudentGrouper {
 		int luckyWinnerIndex = generator.nextInt(luckyWinners.size());
 		String luckyWinner = luckyWinners.get(luckyWinnerIndex);
 		System.out.println("Student: " + luckyWinner + " se dodjeljuje timu 4!");
+		teams.put(luckyWinner, 4);
+		
+		StudentTestingShuffler studentTestingShuffler = new StudentTestingShuffler(teams, generator);
+		Map<String, Integer> studentTestingTeam = studentTestingShuffler.shuffle();
+		System.out.println("Testiranje:");
+		for (String student : studentNames) {
+			System.out.println(student + " (tim " + teams.get(student) +")" + " => projekt od tima " + studentTestingTeam.get(student));
+		}
 
 		
 
